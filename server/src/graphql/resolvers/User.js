@@ -1,4 +1,4 @@
-import { getUser, isBase64 } from '../../helpers';
+import { getUser, isBase64, getCompany } from '../../helpers';
 
 const base64 = require('btoa');
 
@@ -19,5 +19,13 @@ export default {
     }
 
     return friends;
+  },
+
+  company: async (root, args, { ctx }, info) => {
+    let company = {};
+    if (root.company) {
+      company = getCompany(root.company);
+    }
+    return company;
   },
 };
