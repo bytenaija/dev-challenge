@@ -1,6 +1,11 @@
+input Filter {
+  name: String
+  company: String
+}
+
 type Query {
   user(id: ID!): User!
-  users(name: String): [User!]
+  users(filters: Filter): [User!]
   company(id: ID!): Company!
   companies: [Company!]
 }
