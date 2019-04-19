@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'graceful-fs';
 import util from 'util';
 const writeFile = util.promisify(fs.writeFile);
 

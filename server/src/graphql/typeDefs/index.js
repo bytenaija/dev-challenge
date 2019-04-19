@@ -1,5 +1,5 @@
 import { gql } from 'apollo-server-koa';
-import fs from 'fs';
+import fs from 'graceful-fs';
 import glob from 'glob';
 
 // Load all the .graphql files.

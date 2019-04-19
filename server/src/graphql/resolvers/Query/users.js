@@ -1,5 +1,5 @@
 /* eslint-disable no-return-await */
-import fs from 'fs';
+import fs from 'graceful-fs';
 import util from 'util';
 
 import { fetchUsers } from '../../../helpers';

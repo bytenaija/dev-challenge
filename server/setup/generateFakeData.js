@@ -1,6 +1,6 @@
 import faker from 'faker';
 import uuid from 'uuid/v4';
-import fs from 'fs';
+import fs from 'graceful-fs';
 
 const RECORDS = 2000;
 const MAX_FRIENDS = 10;
