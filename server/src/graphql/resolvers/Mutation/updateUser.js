@@ -1,4 +1,4 @@
-import { setUser } from '../../../helpers';
+import { setUser, getUser } from '../../../helpers';
 
 export default async function User(root, { user }, { ctx }, info) {
   // todo: 1 this throws a unfriendly (and potentially unsafe) error if a non-existnant user ID is entered.
@@ -6,8 +6,16 @@ export default async function User(root, { user }, { ctx }, info) {
 
   // todo: 2 why is this update overwriting existing user data? Need to fix this so that just data input is
   // updated rather than overwritting all the data.
+  try {
+    const isUserExists = await getUser(user.id);
 
-  await setUser(user);
+    if (isUserExists) {
+      const updatedUserInformation = { ...isUserExists, ...user };
 
-  return true;
+      await setUser(updatedUserInformation);
+      return true;
+    }
+  } catch (err) {
+    return Promise.reject(new Error('The user does not exist. Try again.'));
+  }
 }
