@@ -22,7 +22,7 @@ export default {
   },
 
   company: async (root, args, { ctx }, info) => {
-    let company = {};
+    let company;
     if (root.company) {
       company = getCompany(root.company);
     }
