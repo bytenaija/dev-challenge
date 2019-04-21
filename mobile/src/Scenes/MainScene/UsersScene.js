@@ -4,7 +4,8 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   FlatList,
-  StyleSheet
+  StyleSheet,
+  StatusBar,
 } from 'react-native';
 import { gql } from 'apollo-boost';
 import { Query } from 'react-apollo';
@@ -13,8 +14,13 @@ import { ErrorScene, UserList } from '../../components';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
-  }
+    flex: 1,
+  },
+  line: {
+    height: 0.5,
+    width: '100%',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+  },
 });
 
 const query = gql`
@@ -30,11 +36,16 @@ const query = gql`
 `;
 
 export default class UsersScene extends PureComponent {
+  static navigationOptions = {
+    title: 'Users',
+  };
+
   render() {
     const { navigation } = this.props;
 
     return (
       <View style={styles.container}>
+        <StatusBar backgroundColor="#6200EE" barStyle="light-content" />
         <Query query={query}>
           {({ loading, error, data }) => {
             if (loading) {
@@ -42,6 +53,7 @@ export default class UsersScene extends PureComponent {
             }
 
             if (error) {
+              console.log(error);
               return <ErrorScene message={error.message} />;
             }
 
@@ -50,13 +62,14 @@ export default class UsersScene extends PureComponent {
                 data={data.users}
                 renderItem={({ item }) => (
                   <TouchableOpacity
-                    onPress={() =>
-                      navigation.navigate('UserScene', { id: item.id })
+                    onPress={() => navigation.navigate('UserScene', { id: item.id })
                     }
                   >
                     <UserList user={item} />
                   </TouchableOpacity>
                 )}
+                keyExtractor={item => item.id.toString()}
+                ItemSeparatorComponent={() => <View style={styles.line} />}
               />
             );
           }}

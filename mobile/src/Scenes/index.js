@@ -7,10 +7,13 @@ export default createAppContainer(
   createSwitchNavigator(
     {
       MainScene,
-      SplashScene
+      SplashScene,
     },
     {
-      initialRouteName: 'SplashScene'
-    }
-  )
+      initialRouteName: 'SplashScene',
+      navigationOptions: {
+        header: 'screen',
+      },
+    },
+  ),
 );
