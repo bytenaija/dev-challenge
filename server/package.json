@@ -36,7 +36,7 @@
     },
     "scripts": {
         "setup": "babel-node setup/index.js",
-        "start": "nodemon  --watch src --exec babel-node index.js",
+        "start": "nodemon $NODE_DEBUG_OPTION -e js,graphql --watch src --exec babel-node index.js",
         "build:server": "babel src -d build --copy-files",
         "serve": "node build/index.js"
     }
