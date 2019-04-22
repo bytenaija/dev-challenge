@@ -1,12 +1,17 @@
 import React, { memo } from 'react';
 import {
- View, StyleSheet, Image, ImageBackground 
+  View,
+  StyleSheet,
+  Image,
+  ImageBackground,
+  TouchableOpacity,
 } from 'react-native';
 import {
- Button, Card, Title, Paragraph, Text 
+ Button, Card, Title, Paragraph 
 } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/FontAwesome';
+
 import Address from './Address';
+import CompanyList from './CompanyList';
 
 const styles = StyleSheet.create({
   userList: {
@@ -77,22 +82,30 @@ export default memo(({ user, navigation }) => (
                 alignItems: 'center',
               }}
             >
-              <Text>Company</Text>
-              <Button
-                icon={{ source: 'add-a-photo', direction: 'rtl' }}
+              <TouchableOpacity
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
                 onPress={() => navigation.navigate('CompanyScene', {
                     id: user.company.id,
                   })
                 }
               >
-                {user.company.name}
-              </Button>
+                <CompanyList company={user.company} mini />
+              </TouchableOpacity>
             </View>
           )}
           <Address address={user.address} />
         </View>
       </Card.Content>
-      <Card.Actions>
+      <Card.Actions
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
         <Button
           icon="edit"
           onPress={() => navigation.navigate('UpdateUserScene', {

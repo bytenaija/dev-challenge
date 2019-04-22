@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   line: {
     height: 0.5,
     width: '100%',
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'rgba(0,0,0,1)',
   },
 });
 
@@ -37,7 +37,7 @@ const query = gql`
 
 export default class UsersScene extends PureComponent {
   static navigationOptions = {
-    title: 'Users',
+    headerTitle: 'Users',
   };
 
   render() {

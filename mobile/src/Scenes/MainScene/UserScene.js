@@ -9,7 +9,9 @@ import {
 import { Text } from 'react-native-paper';
 import { gql } from 'apollo-boost';
 import { Query } from 'react-apollo';
-import { ErrorScene, UserList, UserDetails } from '../../components';
+import {
+ ErrorScene, UserList, UserDetails, MapView 
+} from '../../components';
 import { USER } from '../../graphql';
 
 export default class UserScene extends PureComponent {
@@ -21,13 +23,6 @@ export default class UserScene extends PureComponent {
     const { navigation } = this.props;
     const id = navigation.getParam('id');
 
-    // todo: 2. would be cool if we actually displayed full user data that is contained in the user data object.
-
-    // todo: 3. would be extra cool to include their company info, and if you tap on it you can go that CompanyScene.
-    // if this is done correctly, we should be re-using components from the CompaniesScene.
-
-    // todo: 4. would be even cooler to see a list of their friends, so I can tap on them an get more info about that user.
-    // todo: 5 would be cool to make the user name and email updateable and saved ot the database, so we can let our users change their info.
     return (
       <View>
         <Query query={USER} variables={{ id }}>
@@ -43,6 +38,10 @@ export default class UserScene extends PureComponent {
             return (
               <ScrollView style={{ paddingLeft: 10, paddingRight: 10 }}>
                 <UserDetails user={data.user} navigation={navigation} />
+                <MapView
+                  longitude={data.user.address.longitude}
+                  latitude={data.user.address.latitude}
+                />
                 <Text color="primary">
                   Friends 
 {' '}

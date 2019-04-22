@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { gql } from 'apollo-boost';
 import { Query } from 'react-apollo';
-import { ErrorScene, UserList } from '../../components';
+import { ErrorScene, CompanyList } from '../../components';
 
 const styles = StyleSheet.create({
   container: {
@@ -23,12 +23,11 @@ const styles = StyleSheet.create({
 });
 
 const query = gql`
-  query Users {
-    users {
+  query Companies {
+    companies {
       id
       color
       name
-      email
       image
     }
   }
@@ -56,15 +55,16 @@ export default class CompaniesScene extends PureComponent {
 
             return (
               <FlatList
-                data={data.users}
+                data={data.companies}
                 renderItem={({ item }) => (
                   <TouchableOpacity
                     onPress={() => navigation.navigate('CompanyScene', { id: item.id })
                     }
                   >
-                    <UserList user={item} />
+                    <CompanyList company={item} />
                   </TouchableOpacity>
                 )}
+                keyExtractor={item => item.id.toString()}
               />
             );
           }}

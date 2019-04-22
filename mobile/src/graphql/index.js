@@ -43,3 +43,40 @@ export const USER = gql`
     }
   }
 `;
+
+export const COMPANY = gql`
+  query Company($id: ID!) {
+    company(id: $id) {
+      id
+      color
+      name
+      bs
+      suffice
+      catchPhrase
+
+      image
+      employees {
+        id
+        name
+        image
+        email
+      }
+      address {
+        zipCode
+        city
+        cityPrefix
+        citySuffix
+        streetName
+        streetAddress
+        streetSuffix
+        streetPrefix
+        secondaryAddress
+        county
+        country
+        state
+        latitude
+        longitude
+      }
+    }
+  }
+`;

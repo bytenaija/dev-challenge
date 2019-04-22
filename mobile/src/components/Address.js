@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(({ address }) => (
+export default memo(({ address, color }) => (
   <View
     style={{
       justifyContent: 'center',
@@ -45,7 +45,7 @@ export default memo(({ address }) => (
       width: '100%',
     }}
   >
-    <Text style={{ textAlign: 'center' }}>
+    <Text style={{ textAlign: 'center', color: color || '#000' }}>
       {address.streetAddress} 
 {' '}
 {address.streetSuffix} 

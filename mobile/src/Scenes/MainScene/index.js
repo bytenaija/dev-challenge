@@ -14,70 +14,107 @@ import UpdateUserScene from './UpdateUserScene';
 
 const HomeScene = createBottomTabNavigator(
   {
-    Users: {
-      screen: UsersScene,
-      navigationOptions: {
-        title: 'Users',
-        tabBarIcon: ({ focused }) => (focused ? (
-            <Icon
-              name="users"
-              size={24}
-              color="#6200EE"
-              iconStyle={{ paddingBottom: 0, paddingTop: 0 }}
-            />
-          ) : (
-            <Icon
-              name="home"
-              size={24}
-              color="#007700"
-              iconStyle={{ paddingBottom: 0, paddingTop: 0 }}
-            />
-          )),
+    Users: createStackNavigator(
+      {
+        screen: UsersScene,
       },
-    },
-    Companies: {
-      screen: CompaniesScene,
-      navigationOptions: {
-        title: 'Companies',
-        tabBarIcon: ({ focused }) => (focused ? (
-            <Icon
-              name="home"
-              size={24}
-              iconStyle={{ paddingBottom: 0, paddingTop: 0 }}
-              color="#6200EE"
+
+      {
+        defaultNavigationOptions: {
+          headerBackground: (
+            <LinearGradient
+              colors={['#6200EE', '#10356c']}
+              style={{ flex: 1 }}
             />
-          ) : (
-            <Icon
-              name="home"
-              size={24}
-              iconStyle={{ paddingBottom: 0, paddingTop: 0 }}
-              color="#007700"
-            />
-          )),
+          ),
+          headerTitleStyle: { color: '#fff' },
+          headerTintColor: '#fff',
+        },
+
+        navigationOptions: {
+          title: 'Users',
+          tabBarIcon: ({ focused }) => (focused ? (
+              <Icon
+                name="users"
+                size={24}
+                color="#6200EE"
+                iconStyle={{ paddingBottom: 0, paddingTop: 0 }}
+              />
+            ) : (
+              <Icon
+                name="users"
+                size={24}
+                color="#888"
+                iconStyle={{ paddingBottom: 0, paddingTop: 0 }}
+              />
+            )),
+        },
       },
-    },
+    ),
+    Companies: createStackNavigator(
+      {
+        screen: CompaniesScene,
+      },
+      {
+        defaultNavigationOptions: {
+          headerBackground: (
+            <LinearGradient
+              colors={['#6200EE', '#10356c']}
+              style={{ flex: 1 }}
+            />
+          ),
+          headerTitleStyle: { color: '#fff' },
+          headerTintColor: '#fff',
+        },
+        navigationOptions: {
+          title: 'Companies',
+
+          tabBarIcon: ({ focused }) => (focused ? (
+              <Icon
+                name="home"
+                size={24}
+                iconStyle={{ paddingBottom: 0, paddingTop: 0 }}
+                color="#6200EE"
+              />
+            ) : (
+              <Icon
+                name="home"
+                size={24}
+                iconStyle={{ paddingBottom: 0, paddingTop: 0 }}
+                color="#888"
+              />
+            )),
+        },
+      },
+    ),
   },
+
   {
     initialRouteName: 'Users',
     headerMode: 'screen',
-    navigationOptions: {
-      headerBackground: (
-        <LinearGradient colors={['#6200EE', '#10356c']} style={{ flex: 1 }} />
-      ),
-      headerTitleStyle: { color: '#fff' },
-    },
   },
 );
 
 export default createStackNavigator(
   {
-    HomeScene,
+    HomeScene: {
+      screen: HomeScene,
+      navigationOptions: ({ navigation }) => ({
+        header: null,
+      }),
+    },
     UserScene,
     CompanyScene,
     UpdateUserScene,
   },
   {
     initialRouteName: 'HomeScene',
-    defaultNavigationOptions: {},
+    defaultNavigationOptions: {
+      headerBackground: (
+        <LinearGradient colors={['#6200EE', '#10356c']} style={{ flex: 1 }} />
+      ),
+      headerTitleStyle: { color: '#fff' },
+      headerTintColor: '#fff',
+    },
   },
 );
